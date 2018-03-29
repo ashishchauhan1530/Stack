@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+   
+var sum = 0;
+String.prototype.evaluateExpression = function(){
+  var s1  = [];
+  
+  
+  for (var i = 0; i < this.length; i++) {
+    if (parseInt(this.charAt(i))) {
+      s1.push(parseInt(this.charAt(i)));
+    }
+
+    if (this.charAt(i) === '*') {
+      s1.push(s1.pop() * this.charAt(i + 1));
+      i = i + 1;
+    }
+  }
+
+  while (s1.length) {
+    sum = sum +  s1.pop();
+  }
+  
+  $('.evaluateExpression').html('<b>Answer is </b>' +sum);  
+  return sum;
+};
+
+'5*5+5'.evaluateExpression();
+
+});
+</script>
+</head>
+<body>
+    <p>Problem: Evaluate an expression given only single digits and only 2 operators * and +.</p>
+    <p>Solution:</p>
+    <ul>
+        <li>Save first element in the s1</li>
+        <li>loop the string and if the second char is * sign then , multiply first element from s1 with the next element</li>
+        <li>save the result into s1</li>
+        <li>sum all the elements of s1</li>
+    </ul>    
+    <div><b>Passed String value is</b> 5*5+5</div>
+    <div class="evaluateExpression"></div>
+</body>
+</html>
